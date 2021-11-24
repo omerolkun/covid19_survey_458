@@ -21,6 +21,21 @@ public class MainActivity extends AppCompatActivity {
     EditText input_name_surname;
     EditText input_birth_date;
     Spinner input_city;
+    Spinner s;
+
+    String[] arraySpinner = new String[] {
+            "Select City...", "ADANA","ADIYAMAN","AFYONKARAHİSAR","AĞRI","AMASYA","ANKARA",
+            "ANTALYA","ARTVİN","AYDIN","BALIKESİR","BİLECİK","BİNGÖL","BİTLİS","BOLU","BURDUR",
+            "BURSA","ÇANAKKALE","ÇANKIRI","ÇORUM","DENİZLİ","DİYARBAKIR","EDİRNE","ELAZIĞ",
+            "ERZİNCAN","ERZURUM","ESKİŞEHİR","GAZİANTEP","GİRESUN","GÜMÜŞHANE","HAKKARİ",
+            "HATAY","ISPARTA","MERSİN","İSTANBUL","İZMİR","KARS","KASTAMONU","KAYSERİ",
+            "KIRKLARELİ","KIRŞEHİR","KOCAELİ","KONYA","KÜTAHYA","MALATYA","MANİSA",
+            "KAHRAMANMARAŞ","MARDİN","MUĞLA","MUŞ","NEVŞEHİR","NİĞDE","ORDU","RİZE","SAKARYA",
+            "SAMSUN","SİİRT","SİNOP","SİVAS","TEKİRDAĞ","TOKAT","TRABZON","TUNCELİ","ŞANLIURFA",
+            "UŞAK","VAN","YOZGAT","ZONGULDAK","AKSARAY","BAYBURT","KARAMAN","KIRIKKALE",
+            "BATMAN","ŞIRNAK","BARTIN","ARDAHAN","IĞDIR","YALOVA","KARABÜK","KİLİS","OSMANİYE",
+            "DÜZCE"
+    };
 
 
     String str_input_name_surname;
@@ -31,21 +46,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         input_name_surname = (EditText) findViewById(R.id.input_name_surname);
-        
-        String[] arraySpinner = new String[] {
-                "Select City...", "ADANA","ADIYAMAN","AFYONKARAHİSAR","AĞRI","AMASYA","ANKARA",
-                "ANTALYA","ARTVİN","AYDIN","BALIKESİR","BİLECİK","BİNGÖL","BİTLİS","BOLU","BURDUR",
-                "BURSA","ÇANAKKALE","ÇANKIRI","ÇORUM","DENİZLİ","DİYARBAKIR","EDİRNE","ELAZIĞ",
-                "ERZİNCAN","ERZURUM","ESKİŞEHİR","GAZİANTEP","GİRESUN","GÜMÜŞHANE","HAKKARİ",
-                "HATAY","ISPARTA","MERSİN","İSTANBUL","İZMİR","KARS","KASTAMONU","KAYSERİ",
-                "KIRKLARELİ","KIRŞEHİR","KOCAELİ","KONYA","KÜTAHYA","MALATYA","MANİSA",
-                "KAHRAMANMARAŞ","MARDİN","MUĞLA","MUŞ","NEVŞEHİR","NİĞDE","ORDU","RİZE","SAKARYA",
-                "SAMSUN","SİİRT","SİNOP","SİVAS","TEKİRDAĞ","TOKAT","TRABZON","TUNCELİ","ŞANLIURFA",
-                "UŞAK","VAN","YOZGAT","ZONGULDAK","AKSARAY","BAYBURT","KARAMAN","KIRIKKALE",
-                "BATMAN","ŞIRNAK","BARTIN","ARDAHAN","IĞDIR","YALOVA","KARABÜK","KİLİS","OSMANİYE",
-                "DÜZCE"
-        };
-        Spinner s = (Spinner) findViewById(R.id.input_city);
+
+
+        s = (Spinner) findViewById(R.id.input_city);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, arraySpinner);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -104,6 +107,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //check city is selected or not
+    private Boolean city_check(String city){
+        String non_select = "Select City...";
+        if (city.equals(non_select)){
+            return true;
+        }
+        return false;
+    }
+
 
 
 
@@ -125,8 +137,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         //2.Spinner variables
-        String str_spinner_item = input_city.getSelectedItem().toString();
-
+        String str_spinner_item = s.getSelectedItem().toString();
+        Boolean bool_city_selection = city_check(str_spinner_item);
         //Alert message after the button is clicked
         String result_message = "";
         //Alert message after the button is clicked
@@ -139,7 +151,12 @@ public class MainActivity extends AppCompatActivity {
         }
         //third check is missing surname
         if(bool_missing_surname == true){
-            result_message += "You need to write surname too!";
+            result_message += "You need to write surname too!\n";
+        }
+
+        //fourth select city or not
+        if (bool_city_selection == true){
+            result_message += "You need to select your city!\n";
         }
 
 
@@ -147,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        alertDialog.setMessage(str_spinner_item);
+        alertDialog.setMessage(result_message);
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
