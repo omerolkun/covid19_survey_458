@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -30,6 +31,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         input_name_surname = (EditText) findViewById(R.id.input_name_surname);
+        
+        String[] arraySpinner = new String[] {
+                "Select City...", "ADANA","ADIYAMAN","AFYONKARAHİSAR","AĞRI","AMASYA","ANKARA",
+                "ANTALYA","ARTVİN","AYDIN","BALIKESİR","BİLECİK","BİNGÖL","BİTLİS","BOLU","BURDUR",
+                "BURSA","ÇANAKKALE","ÇANKIRI","ÇORUM","DENİZLİ","DİYARBAKIR","EDİRNE","ELAZIĞ",
+                "ERZİNCAN","ERZURUM","ESKİŞEHİR","GAZİANTEP","GİRESUN","GÜMÜŞHANE","HAKKARİ",
+                "HATAY","ISPARTA","MERSİN","İSTANBUL","İZMİR","KARS","KASTAMONU","KAYSERİ",
+                "KIRKLARELİ","KIRŞEHİR","KOCAELİ","KONYA","KÜTAHYA","MALATYA","MANİSA",
+                "KAHRAMANMARAŞ","MARDİN","MUĞLA","MUŞ","NEVŞEHİR","NİĞDE","ORDU","RİZE","SAKARYA",
+                "SAMSUN","SİİRT","SİNOP","SİVAS","TEKİRDAĞ","TOKAT","TRABZON","TUNCELİ","ŞANLIURFA",
+                "UŞAK","VAN","YOZGAT","ZONGULDAK","AKSARAY","BAYBURT","KARAMAN","KIRIKKALE",
+                "BATMAN","ŞIRNAK","BARTIN","ARDAHAN","IĞDIR","YALOVA","KARABÜK","KİLİS","OSMANİYE",
+                "DÜZCE"
+        };
+        Spinner s = (Spinner) findViewById(R.id.input_city);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, arraySpinner);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        s.setAdapter(adapter);
 
 
     }
@@ -91,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
         alertDialog.setTitle("Alert");
         //variables and their display result
+        //1.name and surname variables
         str_input_name_surname = input_name_surname.getText().toString();
         //To List to check names and surname separately
         List<String> myList = new ArrayList<String>(Arrays.asList(str_input_name_surname.split(" ")));
@@ -100,6 +121,11 @@ public class MainActivity extends AppCompatActivity {
         Boolean bool_regex_name_surname = check_regex(myList);
         //variable to check missing surname
         Boolean bool_missing_surname = missing_surname(str_input_name_surname);
+
+
+
+        //2.Spinner variables
+        String str_spinner_item = input_city.getSelectedItem().toString();
 
         //Alert message after the button is clicked
         String result_message = "";
@@ -121,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        alertDialog.setMessage(result_message);
+        alertDialog.setMessage(str_spinner_item);
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
