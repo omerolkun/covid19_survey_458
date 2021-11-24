@@ -33,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
     EditText input_day;
     EditText input_month;
     EditText input_year;
+    String str_day;
+    String str_month;
+    String str_year;
+    //Chane field variable
+    EditText change_field;
 
 
 
@@ -58,8 +63,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //name surname variable
         input_name_surname = (EditText) findViewById(R.id.input_name_surname);
+
+        //change field value
+        change_field = (EditText) findViewById(R.id.input_changes);
 
         //value of city
         s = (Spinner) findViewById(R.id.input_city);
@@ -142,13 +150,24 @@ public class MainActivity extends AppCompatActivity {
 
         //endof date issue
 
-        // value of genders
 
 
 
 
     }
+    //check the string input is number or not
+    private Boolean number_regex(String dates){
+        Pattern p = Pattern.compile("[0-9]+");
+        Matcher m;
+        Boolean result = true;
 
+        m = p.matcher(dates);
+        result = m.matches();
+        if (result == false){
+            return false;
+        }
+        return true;
+    }
 
     //check total length of name
     private String check_len(String name){
@@ -217,9 +236,55 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
     }
+    //check day date
+    private Boolean check_day(String day_par) {
+        if(number_regex(day_par) == false){
+            return false;
+        }
 
+        Integer result;
+        if (day_par.length() == 0) {
+            result = 0;
+        } else
+            {result = Integer.parseInt(day_par);}
+        if(result < 1 || result > 31){
+            return false;
+        }
+        return true;
+    }
+    //check month date
+    private Boolean check_month(String month) {
+        if(number_regex(month) == false){
+            return false;
+        }
 
+        Integer result;
 
+        result = Integer.parseInt(month);
+        if(result < 1 || result > 12){
+            return false;
+        }
+        return true;
+    }
+    //check year
+    private Boolean check_year(String year){
+        if (number_regex(year) == false){
+            return false;
+        }
+        Integer result = Integer.parseInt(year);
+        if(result < 1930 || result > 2010){
+            return false;
+        }
+        return true;
+    }
+
+    //check change field
+    private Boolean check_change_field(String changes){
+        if(changes.length() <  10 || changes.length()>100){
+            return false;
+        }
+        return true;
+    }
 
     public void createAlertDialog(View v) {
         AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
@@ -256,6 +321,18 @@ public class MainActivity extends AppCompatActivity {
         //variable whether gender is selected or not
         Boolean bool_gender_select = check_gender(radioButtonID);
 
+        //4.date values
+        str_day = input_day.getText().toString();
+        str_month = input_month.getText().toString();
+        str_year = input_year.getText().toString();
+        Boolean bool_day = check_day(str_day);
+        Boolean bool_month = check_month(str_month);
+        Boolean bool_year = check_year(str_year);
+
+        //5 change field value
+        String str_change_field = change_field.getText().toString();
+        Boolean bool_change_field = check_change_field(str_change_field);
+
 
         //Alert message after the button is clicked
         String result_message = "";
@@ -281,7 +358,23 @@ public class MainActivity extends AppCompatActivity {
         if (bool_gender_select == false){
             result_message += "You need to select your gender!\n";
         }
-
+        //sixth select a valid date
+        //day
+        if(bool_day == false){
+            result_message += "Invalid day!\n";
+        }
+        //month
+        if(bool_month == false){
+            result_message += "Invalid month!\n";
+        }
+        //year
+        if(bool_year == false){
+            result_message += "Invalid year!\n";
+        }
+        //change fields
+        if(bool_change_field == false){
+            result_message += "Changes input is invalid";
+        }
 
 
 
