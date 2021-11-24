@@ -126,6 +126,14 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
+    //check radio button
+    private Boolean check_gender(int radio_id){
+        if (radio_id == -1){
+            return false;
+        }else{
+            return true;
+        }
+    }
 
 
 
@@ -160,8 +168,10 @@ public class MainActivity extends AppCompatActivity {
             input_gender_button = (RadioButton) findViewById(radioButtonID);
             String str_gender = input_gender_button.getText().toString();
         }else{
-            
+
         }
+        //variable whether gender is selected or not
+        Boolean bool_gender_select = check_gender(radioButtonID);
 
 
         //Alert message after the button is clicked
@@ -184,12 +194,18 @@ public class MainActivity extends AppCompatActivity {
             result_message += "You need to select your city!\n";
         }
 
+        //fifth select male or female gender
+        if (bool_gender_select == false){
+            result_message += "You need to select your gender!\n";
+        }
 
 
 
 
 
-        alertDialog.setMessage(String.valueOf(radioButtonID));
+
+
+        alertDialog.setMessage(result_message);
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
