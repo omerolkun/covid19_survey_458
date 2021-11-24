@@ -24,8 +24,11 @@ public class MainActivity extends AppCompatActivity {
     EditText input_birth_date;
     Spinner input_city;
     Spinner s;
+    //radio issue
     RadioGroup input_gender_group;
-    RadioButton input_gender;
+    RadioButton input_gender_button;
+
+
 
     String[] arraySpinner = new String[] {
             "Select City...", "ADANA","ADIYAMAN","AFYONKARAHİSAR","AĞRI","AMASYA","ANKARA",
@@ -59,10 +62,8 @@ public class MainActivity extends AppCompatActivity {
         s.setAdapter(adapter);
 
         // value of genders
-        input_gender_group = (RadioGroup) findViewById(R.id.radio_group);
-        int x = input_gender_group.getCheckedRadioButtonId();
-        input_gender = (RadioButton) findViewById(x);
-        //String gendertext = input_gender.getText().toString();
+
+
 
 
     }
@@ -152,7 +153,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         //3.RadioButton variables
-        //String str_gender = input_gender.getText().toString();
+        input_gender_group = (RadioGroup) findViewById(R.id.radio_group);
+        int radioButtonID = input_gender_group.getCheckedRadioButtonId();
+        input_gender_button = (RadioButton) findViewById(radioButtonID);
+        String str_gender = input_gender_button.getText().toString();
 
 
         //Alert message after the button is clicked
@@ -180,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        alertDialog.setMessage(str_spinner_item);
+        alertDialog.setMessage(str_gender);
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
