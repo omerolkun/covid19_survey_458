@@ -40,19 +40,17 @@ public class MainActivity extends AppCompatActivity {
     EditText change_field;
 
 
-
-
-    String[] arraySpinner = new String[] {
-            "Select City...", "ADANA","ADIYAMAN","AFYONKARAHİSAR","AĞRI","AMASYA","ANKARA",
-            "ANTALYA","ARTVİN","AYDIN","BALIKESİR","BİLECİK","BİNGÖL","BİTLİS","BOLU","BURDUR",
-            "BURSA","ÇANAKKALE","ÇANKIRI","ÇORUM","DENİZLİ","DİYARBAKIR","EDİRNE","ELAZIĞ",
-            "ERZİNCAN","ERZURUM","ESKİŞEHİR","GAZİANTEP","GİRESUN","GÜMÜŞHANE","HAKKARİ",
-            "HATAY","ISPARTA","MERSİN","İSTANBUL","İZMİR","KARS","KASTAMONU","KAYSERİ",
-            "KIRKLARELİ","KIRŞEHİR","KOCAELİ","KONYA","KÜTAHYA","MALATYA","MANİSA",
-            "KAHRAMANMARAŞ","MARDİN","MUĞLA","MUŞ","NEVŞEHİR","NİĞDE","ORDU","RİZE","SAKARYA",
-            "SAMSUN","SİİRT","SİNOP","SİVAS","TEKİRDAĞ","TOKAT","TRABZON","TUNCELİ","ŞANLIURFA",
-            "UŞAK","VAN","YOZGAT","ZONGULDAK","AKSARAY","BAYBURT","KARAMAN","KIRIKKALE",
-            "BATMAN","ŞIRNAK","BARTIN","ARDAHAN","IĞDIR","YALOVA","KARABÜK","KİLİS","OSMANİYE",
+    String[] arraySpinner = new String[]{
+            "Select City...", "ADANA", "ADIYAMAN", "AFYONKARAHİSAR", "AĞRI", "AMASYA", "ANKARA",
+            "ANTALYA", "ARTVİN", "AYDIN", "BALIKESİR", "BİLECİK", "BİNGÖL", "BİTLİS", "BOLU", "BURDUR",
+            "BURSA", "ÇANAKKALE", "ÇANKIRI", "ÇORUM", "DENİZLİ", "DİYARBAKIR", "EDİRNE", "ELAZIĞ",
+            "ERZİNCAN", "ERZURUM", "ESKİŞEHİR", "GAZİANTEP", "GİRESUN", "GÜMÜŞHANE", "HAKKARİ",
+            "HATAY", "ISPARTA", "MERSİN", "İSTANBUL", "İZMİR", "KARS", "KASTAMONU", "KAYSERİ",
+            "KIRKLARELİ", "KIRŞEHİR", "KOCAELİ", "KONYA", "KÜTAHYA", "MALATYA", "MANİSA",
+            "KAHRAMANMARAŞ", "MARDİN", "MUĞLA", "MUŞ", "NEVŞEHİR", "NİĞDE", "ORDU", "RİZE", "SAKARYA",
+            "SAMSUN", "SİİRT", "SİNOP", "SİVAS", "TEKİRDAĞ", "TOKAT", "TRABZON", "TUNCELİ", "ŞANLIURFA",
+            "UŞAK", "VAN", "YOZGAT", "ZONGULDAK", "AKSARAY", "BAYBURT", "KARAMAN", "KIRIKKALE",
+            "BATMAN", "ŞIRNAK", "BARTIN", "ARDAHAN", "IĞDIR", "YALOVA", "KARABÜK", "KİLİS", "OSMANİYE",
             "DÜZCE"
     };
 
@@ -85,7 +83,8 @@ public class MainActivity extends AppCompatActivity {
         input_day.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
 
             @Override
             public void beforeTextChanged(CharSequence s, int start,
@@ -95,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
-                if(s.length() == 2){
+                if (s.length() == 2) {
                     input_month.setText("");
                     input_month.requestFocus();
                 }
@@ -108,7 +107,8 @@ public class MainActivity extends AppCompatActivity {
         input_month.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
 
             @Override
             public void beforeTextChanged(CharSequence s, int start,
@@ -118,10 +118,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
-                if(s.length() == 2){
+                if (s.length() == 2) {
                     input_year.setText("");
                     input_year.requestFocus();
-                }else if (s.length()== 0){
+                } else if (s.length() == 0) {
                     input_day.requestFocus();
                 }
             }
@@ -130,7 +130,8 @@ public class MainActivity extends AppCompatActivity {
         input_year.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
 
             @Override
             public void beforeTextChanged(CharSequence s, int start,
@@ -140,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
-                if(s.length() == 0){
+                if (s.length() == 0) {
                     //input_year.setText("");
                     input_month.requestFocus();
                 }
@@ -151,42 +152,40 @@ public class MainActivity extends AppCompatActivity {
         //endof date issue
 
 
-
-
-
     }
+
     //check the string input is number or not
-    private Boolean number_regex(String dates){
+    private Boolean number_regex(String dates) {
         Pattern p = Pattern.compile("[0-9]+");
         Matcher m;
         Boolean result = true;
 
         m = p.matcher(dates);
         result = m.matches();
-        if (result == false){
+        if (result == false) {
             return false;
         }
         return true;
     }
 
     //check total length of name
-    private String check_len(String name){
+    private String check_len(String name) {
         String result = "";
-        if (name.length() >25){
+        if (name.length() > 25) {
             return "The name and surname is too long!\n";
         }
-        if (name.length() < 4){
+        if (name.length() < 4) {
             return "The name and surname is too short!\n";
         }
         return result;
     }
 
     //check names and surname separately
-    private Boolean valid_names_length(List<String> names){
+    private Boolean valid_names_length(List<String> names) {
         //Boolean result = true;
         int size_list = names.size();
-        for (int i = 0; i < size_list - 1; ++i){
-            if (names.get(i).length() < 3){
+        for (int i = 0; i < size_list - 1; ++i) {
+            if (names.get(i).length() < 3) {
                 return false;
             }
         }
@@ -194,93 +193,98 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //check regex for name and surname
-    private Boolean check_regex(List <String> names){
+    private Boolean check_regex(List<String> names) {
         Pattern p = Pattern.compile("[a-zA-Z]*");
         int size_names = names.size();
         Matcher m;
-        Boolean result ;
-        for (int i = 0; i< size_names;i++){
+        Boolean result;
+        for (int i = 0; i < size_names; i++) {
             m = p.matcher(names.get(i));
             result = m.matches();
-            if (result == false){
+            if (result == false) {
                 return false;
             }
         }
 
         return true;
     }
+
     //check whether surname exists
-    private Boolean missing_surname(String s){
-        if (s.contains(" ")== false){
+    private Boolean missing_surname(String s) {
+        if (s.contains(" ") == false) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
 
     }
 
     //check city is selected or not
-    private Boolean city_check(String city){
+    private Boolean city_check(String city) {
         String non_select = "Select City...";
-        if (city.equals(non_select)){
+        if (city.equals(non_select)) {
             return true;
         }
         return false;
     }
+
     //check radio button
-    private Boolean check_gender(int radio_id){
-        if (radio_id == -1){
+    private Boolean check_gender(int radio_id) {
+        if (radio_id == -1) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }
+
     //check day date
     private Boolean check_day(String day_par) {
-        if(number_regex(day_par) == false){
+        if (number_regex(day_par) == false) {
             return false;
         }
-
+// YEMEGE GITMEDEN ONCE YAZ
         Integer result;
         if (day_par.length() == 0) {
             result = 0;
-        } else
-            {result = Integer.parseInt(day_par);}
-        if(result < 1 || result > 31){
+        } else {
+            result = Integer.parseInt(day_par);
+        }
+        if (result < 1 || result > 31) {
             return false;
         }
         return true;
     }
+
     //check month date
     private Boolean check_month(String month) {
-        if(number_regex(month) == false){
+        if (number_regex(month) == false) {
             return false;
         }
 
         Integer result;
 
         result = Integer.parseInt(month);
-        if(result < 1 || result > 12){
+        if (result < 1 || result > 12) {
             return false;
         }
         return true;
     }
+
     //check year
-    private Boolean check_year(String year){
-        if (number_regex(year) == false){
+    private Boolean check_year(String year) {
+        if (number_regex(year) == false) {
             return false;
         }
         Integer result = Integer.parseInt(year);
-        if(result < 1930 || result > 2010){
+        if (result < 1930 || result > 2010) {
             return false;
         }
         return true;
     }
 
     //check change field
-    private Boolean check_change_field(String changes){
-        if(changes.length() <  10 || changes.length()>100){
+    private Boolean check_change_field(String changes) {
+        if (changes.length() < 10 || changes.length() > 100) {
             return false;
         }
         return true;
@@ -302,7 +306,6 @@ public class MainActivity extends AppCompatActivity {
         Boolean bool_missing_surname = missing_surname(str_input_name_surname);
 
 
-
         //2.Spinner variables
         String str_spinner_item = s.getSelectedItem().toString();
         Boolean bool_city_selection = city_check(str_spinner_item);
@@ -312,10 +315,10 @@ public class MainActivity extends AppCompatActivity {
         input_gender_group = (RadioGroup) findViewById(R.id.radio_group);
         //int radioButtonID = 0;
         int radioButtonID = input_gender_group.getCheckedRadioButtonId();
-        if (input_gender_group.getCheckedRadioButtonId() !=-1){
+        if (input_gender_group.getCheckedRadioButtonId() != -1) {
             input_gender_button = (RadioButton) findViewById(radioButtonID);
             String str_gender = input_gender_button.getText().toString();
-        }else{
+        } else {
 
         }
         //variable whether gender is selected or not
@@ -341,44 +344,40 @@ public class MainActivity extends AppCompatActivity {
         //first check length and add its message to result message
         result_message += check_len(str_input_name_surname);
         //second check is if input has blank (this means there is a surname)
-        if (bool_regex_name_surname == false){
+        if (bool_regex_name_surname == false) {
             result_message += "Name surname must contain only letters\n";
         }
         //third check is missing surname
-        if(bool_missing_surname == true){
+        if (bool_missing_surname == true) {
             result_message += "You need to write surname too!\n";
         }
 
         //fourth select city or not
-        if (bool_city_selection == true){
+        if (bool_city_selection == true) {
             result_message += "You need to select your city!\n";
         }
 
         //fifth select male or female gender
-        if (bool_gender_select == false){
+        if (bool_gender_select == false) {
             result_message += "You need to select your gender!\n";
         }
         //sixth select a valid date
         //day
-        if(bool_day == false){
+        if (bool_day == false) {
             result_message += "Invalid day!\n";
         }
         //month
-        if(bool_month == false){
+        if (bool_month == false) {
             result_message += "Invalid month!\n";
         }
         //year
-        if(bool_year == false){
+        if (bool_year == false) {
             result_message += "Invalid year!\n";
         }
         //change fields
-        if(bool_change_field == false){
+        if (bool_change_field == false) {
             result_message += "Changes input is invalid";
         }
-
-
-
-
 
 
         alertDialog.setMessage(result_message);
