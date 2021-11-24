@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -27,6 +29,11 @@ public class MainActivity extends AppCompatActivity {
     //radio issue
     RadioGroup input_gender_group;
     RadioButton input_gender_button;
+    //Date variable
+    EditText input_day;
+    EditText input_month;
+    EditText input_year;
+
 
 
 
@@ -61,12 +68,64 @@ public class MainActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         s.setAdapter(adapter);
 
+        //date issue
+        input_day = (EditText) findViewById(R.id.input_birth_date);
+        input_month = (EditText) findViewById(R.id.input_birth_date2);
+        input_year = (EditText) findViewById(R.id.input_birth_date4);
+
+        //day field
+        input_day.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                if(s.length() == 2){
+                    input_month.setText("");
+                    input_month.requestFocus();
+                }
+            }
+        });
+
+
+        //month field
+
+        input_month.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                if(s.length() == 2){
+                    input_year.setText("");
+                    input_year.requestFocus();
+                }
+            }
+        });
+        //endof date issue
+
         // value of genders
 
 
 
 
     }
+
+
     //check total length of name
     private String check_len(String name){
         String result = "";
