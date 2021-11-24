@@ -113,9 +113,33 @@ public class MainActivity extends AppCompatActivity {
                 if(s.length() == 2){
                     input_year.setText("");
                     input_year.requestFocus();
+                }else if (s.length()== 0){
+                    input_day.requestFocus();
                 }
             }
         });
+        //year field
+        input_year.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                if(s.length() == 0){
+                    //input_year.setText("");
+                    input_month.requestFocus();
+                }
+            }
+        });
+
+
         //endof date issue
 
         // value of genders
