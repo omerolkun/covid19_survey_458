@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //3.RadioButton variables
-        String str_gender = input_gender.getText().toString();
+        //String str_gender = input_gender.getText().toString();
 
 
         //Alert message after the button is clicked
