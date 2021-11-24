@@ -154,9 +154,14 @@ public class MainActivity extends AppCompatActivity {
 
         //3.RadioButton variables
         input_gender_group = (RadioGroup) findViewById(R.id.radio_group);
+        //int radioButtonID = 0;
         int radioButtonID = input_gender_group.getCheckedRadioButtonId();
-        input_gender_button = (RadioButton) findViewById(radioButtonID);
-        String str_gender = input_gender_button.getText().toString();
+        if (input_gender_group.getCheckedRadioButtonId() !=-1){
+            input_gender_button = (RadioButton) findViewById(radioButtonID);
+            String str_gender = input_gender_button.getText().toString();
+        }else{
+            
+        }
 
 
         //Alert message after the button is clicked
@@ -184,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        alertDialog.setMessage(str_gender);
+        alertDialog.setMessage(String.valueOf(radioButtonID));
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
