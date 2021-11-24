@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -22,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     EditText input_birth_date;
     Spinner input_city;
     Spinner s;
+    RadioGroup input_gender_group;
+    RadioButton input_gender;
 
     String[] arraySpinner = new String[] {
             "Select City...", "ADANA","ADIYAMAN","AFYONKARAHİSAR","AĞRI","AMASYA","ANKARA",
@@ -47,12 +51,18 @@ public class MainActivity extends AppCompatActivity {
 
         input_name_surname = (EditText) findViewById(R.id.input_name_surname);
 
-
+        //value of city
         s = (Spinner) findViewById(R.id.input_city);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, arraySpinner);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         s.setAdapter(adapter);
+
+        // value of genders
+        input_gender_group = (RadioGroup) findViewById(R.id.radio_group);
+        int x = input_gender_group.getCheckedRadioButtonId();
+        input_gender = (RadioButton) findViewById(x);
+        //String gendertext = input_gender.getText().toString();
 
 
     }
@@ -139,6 +149,12 @@ public class MainActivity extends AppCompatActivity {
         //2.Spinner variables
         String str_spinner_item = s.getSelectedItem().toString();
         Boolean bool_city_selection = city_check(str_spinner_item);
+
+
+        //3.RadioButton variables
+        String str_gender = input_gender.getText().toString();
+
+
         //Alert message after the button is clicked
         String result_message = "";
         //Alert message after the button is clicked
@@ -164,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        alertDialog.setMessage(result_message);
+        alertDialog.setMessage(str_spinner_item);
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
