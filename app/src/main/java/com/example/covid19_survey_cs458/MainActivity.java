@@ -292,7 +292,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void createAlertDialog(View v) {
         AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-        alertDialog.setTitle("Alert");
+        alertDialog.setTitle("Result of Submission");
+        Integer count_invalid_fields = 0;
         //variables and their display result
         //1.name and surname variables
         str_input_name_surname = input_name_surname.getText().toString();
@@ -346,40 +347,51 @@ public class MainActivity extends AppCompatActivity {
         //second check is if input has blank (this means there is a surname)
         if (bool_regex_name_surname == false) {
             result_message += "Name surname must contain only letters\n";
+            count_invalid_fields += 1;
+
         }
         //third check is missing surname
         if (bool_missing_surname == true) {
             result_message += "You need to write surname too!\n";
+            count_invalid_fields += 1;
         }
 
         //fourth select city or not
         if (bool_city_selection == true) {
             result_message += "You need to select your city!\n";
+            count_invalid_fields += 1;
         }
 
         //fifth select male or female gender
         if (bool_gender_select == false) {
             result_message += "You need to select your gender!\n";
+            count_invalid_fields += 1;
         }
         //sixth select a valid date
         //day
         if (bool_day == false) {
             result_message += "Invalid day!\n";
+            count_invalid_fields += 1;
         }
         //month
         if (bool_month == false) {
             result_message += "Invalid month!\n";
+            count_invalid_fields += 1;
         }
         //year
         if (bool_year == false) {
             result_message += "Invalid year!\n";
+            count_invalid_fields += 1;
         }
         //change fields
         if (bool_change_field == false) {
             result_message += "Changes input is invalid";
+            count_invalid_fields += 1;
         }
 
-
+        if(count_invalid_fields == 0){
+            result_message = "Submission is valid";
+        }
         alertDialog.setMessage(result_message);
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                 new DialogInterface.OnClickListener() {
