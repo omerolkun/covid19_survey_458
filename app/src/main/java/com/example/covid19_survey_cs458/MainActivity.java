@@ -255,6 +255,74 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+
+    //feb29
+    private  boolean checkDateValidity(String dayS, String monthS, String yearS){
+        int day = Integer.parseInt(dayS);
+        int month = Integer.parseInt(monthS);
+        int year = Integer.parseInt(yearS);
+
+        if(day > 31 || day < 1 || month < 1 || month > 12 || year > 2010 || year < 1930)
+            return false;
+
+        if(day <= 28)
+            return true;
+
+        int maxDay = 0;
+
+        switch(month) {
+            case 1:
+                maxDay = 31;
+                break;
+            case 2:
+                if(year % 4 == 0)
+                    maxDay = 29;
+                else
+                    maxDay = 28;
+                break;
+            case 3:
+                maxDay = 31;
+                break;
+            case 4:
+                maxDay = 30;
+                break;
+            case 5:
+                maxDay = 31;
+                break;
+            case 6:
+                maxDay = 30;
+                break;
+            case 7:
+                maxDay = 31;
+                break;
+            case 8:
+                maxDay = 31;
+                break;
+            case 9:
+                maxDay = 30;
+                break;
+            case 10:
+                maxDay = 31;
+                break;
+            case 11:
+                maxDay = 30;
+                break;
+            case 12:
+                maxDay = 31;
+                break;
+        }
+
+        if(day > maxDay)
+            return false;
+        return true;
+
+    }
+
+
+
+
+    //endof feb29
+
     //check month date
     private Boolean check_month(String month) {
         if (number_regex(month) == false) {
@@ -383,14 +451,23 @@ public class MainActivity extends AppCompatActivity {
             result_message += "Invalid year!\n";
             count_invalid_fields += 1;
         }
+
+        if(bool_day && bool_month && bool_year)
+        {
+            if(!checkDateValidity(str_day, str_month, str_year))
+            {
+                result_message += "Invalid Date!\n";
+                count_invalid_fields += 1;
+            }
+        }
         //change fields
         if (bool_change_field == false) {
-            result_message += "Changes input is invalid";
+            result_message += "Changes input is invalid\n";
             count_invalid_fields += 1;
         }
 
         if(count_invalid_fields == 0){
-            result_message = "Submission is valid";
+            result_message = "Submission is valid\n";
         }
         alertDialog.setMessage(result_message);
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
