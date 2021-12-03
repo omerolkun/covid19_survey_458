@@ -18,7 +18,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/input_birth_date2"
         app:layout_constraintTop_toBottomOf="@+id/tv_birth_date"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:freezesText="true" />
 
     <EditText
         android:id="@+id/input_birth_date2"
@@ -33,7 +34,8 @@
         app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_birth_date"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:freezesText="true" />
 
     <TextView
         android:id="@+id/tv_name_surname"
@@ -45,7 +47,7 @@
         app:layout_constraintHorizontal_bias="0.159"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.064" />
+        app:layout_constraintVertical_bias="0.064"/>
 
     <EditText
         android:id="@+id/input_name_surname"
@@ -57,7 +59,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.233"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_name_surname" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_name_surname"
+        android:freezesText="true"/>
 
     <TextView
         android:id="@+id/tv_birth_date"
@@ -69,7 +72,7 @@
         app:layout_constraintHorizontal_bias="0.14"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.231" />
+        app:layout_constraintVertical_bias="0.231"/>
 
     <EditText
         android:id="@+id/input_birth_date"
@@ -83,7 +86,8 @@
         app:layout_constraintEnd_toStartOf="@+id/input_birth_date2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_birth_date"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:freezesText="true"/>
 
     <TextView
         android:id="@+id/tv_city"
@@ -95,7 +99,7 @@
         app:layout_constraintHorizontal_bias="0.152"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.366" />
+        app:layout_constraintVertical_bias="0.366"/>
 
     <Spinner
         android:id="@+id/input_city"
@@ -117,7 +121,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.161"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:freezesText="true"/>
 
     <TextView
         android:id="@+id/tv_changes"
@@ -143,7 +148,8 @@
         app:layout_constraintHorizontal_bias="0.393"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_changes"
-        app:layout_constraintVertical_bias="0.087" />
+        app:layout_constraintVertical_bias="0.087"
+        android:freezesText="true"/>
 
     <Button
         android:id="@+id/submit_button"

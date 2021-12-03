@@ -1,5 +1,6 @@
 package com.example.covid19_survey_cs458;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -56,7 +57,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     String str_input_name_surname;
-
+    String monthSt = "";
+    String yearSt = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
         input_month = (EditText) findViewById(R.id.input_birth_date2);
         input_year = (EditText) findViewById(R.id.input_birth_date4);
 
+        input_month.setText(monthSt);
+        input_year.setText(yearSt);
         //day field
         input_day.addTextChangedListener(new TextWatcher() {
 
@@ -94,10 +98,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
-                if (s.length() == 2) {
-                    input_month.setText("");
-                    input_month.requestFocus();
-                }
+//                if (s.length() == 2) {
+//                    input_month.setText("");
+//                    input_month.requestFocus();
+//                }
             }
         });
 
@@ -118,12 +122,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
-                if (s.length() == 2) {
-                    input_year.setText("");
-                    input_year.requestFocus();
-                } else if (s.length() == 0) {
-                    input_day.requestFocus();
-                }
+//                if (s.length() == 2) {
+//                    input_year.setText("");
+//                    input_year.requestFocus();
+//                } else if (s.length() == 0) {
+//                    input_day.requestFocus();
+//                }
+//                monthSt = s.toString();
             }
         });
         //year field
@@ -131,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
+                yearSt = s.toString();
             }
 
             @Override
@@ -141,16 +147,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
-                if (s.length() == 0) {
-                    //input_year.setText("");
-                    input_month.requestFocus();
-                }
+//                if (s.length() == 0) {
+//                    //input_year.setText("");
+//                    input_month.requestFocus();
+//                }
             }
         });
 
 
         //endof date issue
-
+        if(savedInstanceState != null) {
+            savedInstanceState.getString("month");
+            savedInstanceState.getString("year");
+        }
 
     }
 
@@ -170,14 +179,16 @@ public class MainActivity extends AppCompatActivity {
 
     //check total length of name
     private String check_len(String name) {
-        String result = "";
-        if (name.length() > 25) {
-            return "The name and surname is too long!\n";
+        String[] arr = name.split(" ", 0);
+
+        for(int i = 0; i < arr.length; i ++)
+        {
+            if(arr[i].length() == 0)
+                continue;
+            if(arr[i].length() < 2 || arr[i].length() > 10 )
+                return "Name or surname length is invalid\n";
         }
-        if (name.length() < 4) {
-            return "The name and surname is too short!\n";
-        }
-        return result;
+        return "";
     }
 
     //check names and surname separately
@@ -211,12 +222,24 @@ public class MainActivity extends AppCompatActivity {
 
     //check whether surname exists
     private Boolean missing_surname(String s) {
-        if (s.contains(" ") == false) {
+        if (wordCount(s) <= 1) {
             return true;
         } else {
             return false;
         }
 
+    }
+
+    private int wordCount(String s )
+    {
+
+        String[] arr = s.split(" ", 0);
+        int cnt = 0;
+        for(int i = 0; i < arr.length; i ++)
+            if(arr[i].length() > 0)
+                cnt ++;
+
+        return cnt;
     }
 
     //check city is selected or not
@@ -254,6 +277,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
+
 
 
     //feb29
@@ -414,15 +438,32 @@ public class MainActivity extends AppCompatActivity {
         result_message += check_len(str_input_name_surname);
         //second check is if input has blank (this means there is a surname)
         if (bool_regex_name_surname == false) {
-            result_message += "Name surname must contain only letters\n";
+            result_message += "Name surname must contain only English letters\n";
             count_invalid_fields += 1;
 
         }
         //third check is missing surname
-        if (bool_missing_surname == true) {
+        if (wordCount(str_input_name_surname)  == 0 ) {
+            result_message += "Name surname field cannot be empty!\n";
+            count_invalid_fields += 1;
+        }
+        else if (wordCount(str_input_name_surname)  == 1 ) {
             result_message += "You need to write surname too!\n";
             count_invalid_fields += 1;
         }
+//        else
+//        {
+//            String[] arr = str_input_name_surname.split(" ", 0);
+//            for(int i = 0; i < arr.length; i ++ )
+//            {
+//                if(arr[i].length() == 1)
+//                {
+//                    result_message += "You need to write surname too!\n";
+//                    count_invalid_fields += 1;
+//                    break;
+//                }
+//            }
+//        }
 
         //fourth select city or not
         if (bool_city_selection == true) {
@@ -466,6 +507,10 @@ public class MainActivity extends AppCompatActivity {
             count_invalid_fields += 1;
         }
 
+        if (wordCount(str_change_field) < 3)
+        {
+            result_message += "Changes field must be at least three words\n";
+        }
         if(count_invalid_fields == 0){
             result_message = "Submission is valid\n";
         }
@@ -479,5 +524,17 @@ public class MainActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
 
+        outState.putString("month", monthSt);
+        outState.putString("month", yearSt);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+    }
 }
