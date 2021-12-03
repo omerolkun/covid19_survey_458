@@ -185,8 +185,9 @@ public class MainActivity extends AppCompatActivity {
         {
             if(arr[i].length() == 0)
                 continue;
-            if(arr[i].length() < 2 || arr[i].length() > 10 )
+            if(arr[i].length() < 2 || arr[i].length() > 10 ) {
                 return "Name or surname length is invalid\n";
+            }
         }
         return "";
     }
@@ -435,7 +436,10 @@ public class MainActivity extends AppCompatActivity {
         //Alert message after the button is clicked
 
         //first check length and add its message to result message
-        result_message += check_len(str_input_name_surname);
+        String rs = check_len(str_input_name_surname);
+        result_message += rs;
+        if(rs.equals("Name or surname length is invalid\n"))
+            count_invalid_fields ++;
         //second check is if input has blank (this means there is a surname)
         if (bool_regex_name_surname == false) {
             result_message += "Name surname must contain only English letters\n";
@@ -510,6 +514,7 @@ public class MainActivity extends AppCompatActivity {
         if (wordCount(str_change_field) < 3)
         {
             result_message += "Changes field must be at least three words\n";
+            count_invalid_fields += 1;
         }
         if(count_invalid_fields == 0){
             result_message = "Submission is valid\n";
